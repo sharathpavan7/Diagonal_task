@@ -6,11 +6,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.gson.Gson;
 import com.sharath.diagonal_task.adapter.ContentAdapter;
+import com.sharath.diagonal_task.model.Item;
 import com.sharath.diagonal_task.model.Response;
 import com.sharath.diagonal_task.utils.Utils;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,13 +29,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.content_recycler);
 
         String jsonStr = Utils.getJsonFromAssets(this, "CONTENTLISTINGPAGE-PAGE1.json");
-        Log.i("data", jsonStr);
-
         Gson gson = new Gson();
-        Response page = gson.fromJson(jsonStr, Response.class);
+        Response response = gson.fromJson(jsonStr, Response.class);
+
+        setAdapter(response.getPage().getContent_items().getItems());
+
     }
 
-    private void setAdapter() {
+    private void setAdapter(ArrayList<Item> items) {
+        contentAdapter = new ContentAdapter(this, items);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        recyclerView.setAdapter(contentAdapter);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 }

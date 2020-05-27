@@ -42,7 +42,7 @@ public class ContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         ImageView itemImg = ((ItemViewHolder) holder).getItem_img();
         Glide.with(itemImg.getContext())
-                .load(R.drawable.poster1)
+                .load(getDrawable(item.getPoster_image()))
                 .placeholder(R.drawable.placeholder_for_missing_posters)
                 .into(itemImg);
 
@@ -51,6 +51,31 @@ public class ContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    private int getDrawable(String poster) {
+        switch (poster) {
+            case "poster1.jpg":
+                return R.drawable.poster1;
+            case "poster2.jpg":
+                return R.drawable.poster2;
+            case "poster3.jpg":
+                return R.drawable.poster3;
+            case "poster4.jpg":
+                return R.drawable.poster4;
+            case "poster5.jpg":
+                return R.drawable.poster5;
+            case "poster6.jpg":
+                return R.drawable.poster6;
+            case "poster7.jpg":
+                return R.drawable.poster7;
+            case "poster8.jpg":
+                return R.drawable.poster8;
+            case "poster9.jpg":
+                return R.drawable.poster9;
+            default:
+                return R.drawable.placeholder_for_missing_posters;
+        }
     }
 
     private static class ItemViewHolder extends RecyclerView.ViewHolder {
